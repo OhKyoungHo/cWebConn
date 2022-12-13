@@ -12,7 +12,7 @@ from selenium import webdriver
 
 #-------------------------------1. 웹 페이지 접근
 # 웹드라이버 객체 생성
-driver = webdriver.Chrome('./webdriver/chromedriver')
+driver = webdriver.Chrome('webdrive/chromedriver')
 driver.implicitly_wait(3)
 
 # 페이지 접근

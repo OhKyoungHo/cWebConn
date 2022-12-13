@@ -20,13 +20,18 @@ import Ex07_alldown2
 proc_files = {}
 
 # HTML을 분석하고 다운받는 함수
+
 def analyze_html(url, root_url):
     # (1)
     print("analyze_html=", url)
     savepath = Ex07_alldown2.download_file(url)
+    #  현재 페이지를 다운받았을 때에는 proc_files 에 해당 데이터가 들어있지 않기 때문에
+    #  리턴 없이 그대로 통과하여 함수를 계속 수행할 수 있다.
     if savepath is None: return
     if savepath in proc_files: return # 이미 처리된 파일이면 실행하지 않음
+    # 현재 페이지가 key 이고, 값이 True 인 데이터를 proc_files 에 추가한다.
     proc_files[savepath] = True
+    # proc_files = { "https://docs.python.org/3.5/library/" :True, '~~~~~~' : True }
     # print(proc_files)
 
 
@@ -34,8 +39,12 @@ def analyze_html(url, root_url):
     f = open(savepath, "r", encoding="utf-8")
     html = f.read()
     links = Ex07_alldown1.enum_links(html, url)
+    # 리스트의 url 을 하나씩 추출했을 때 루트경로가 다를 경우에는
+    # 아무 일도 하지 않고 넘어가는 조건문을 작성한다.
     for link_url in links:
         # 링크가 루트 이외의 경로를 나타낸다면 무시 ( 여기서는 docs.python.org 경로가 아니면 무시 )
+        # root_url = "https://docs.python.org/3.5/library/"
+        # 읽어온 파일로부터 루트 경로에 부합하는 페이지 내 모든 링크를 추출하여 리스트 links 에 담는다.
         if link_url.find(root_url) != 0:
             continue
 
@@ -53,6 +62,7 @@ def analyze_html(url, root_url):
 if __name__ == "__main__":
     # URL에 있는 모든 것 다운받기
     url = "https://docs.python.org/3.5/library/"
+    # 시작점이 될 페이지의 루트 경로를 analyze_html() 함수의 인자로 넣기
     analyze_html(url, url)
 
 

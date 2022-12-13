@@ -9,10 +9,10 @@
 from selenium import webdriver
 
 # 0. 네이버 로그인 정보
-myID = '본인의 네이버아이디'
+myID = 'ketty1061'
 myPW = '비밀번호'
 
-# 1. webdriver 객체생성
+# 1. webdrive 객체생성
 
 
 
